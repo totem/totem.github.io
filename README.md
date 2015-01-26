@@ -13,6 +13,8 @@ Totem is continous delivery pipline tool which is aimed in simplifying delivery 
 * Orchestrator on receving all the hooks with status as "success", it invokes deployer api to deploy the built image to CoreOS cluster.
 * Deployer creates fleet unit files for the application and submits the job to fleet daemon (running on CoreOS clusteR). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.
 
+## [Application Deployment](deployment.md)
+
 ## Reporting Bugs / Feature Requests
 Issues can be reported at :
 [https://github.com/totem/totem/issues](https://github.com/totem/totem/issues)
