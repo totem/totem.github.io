@@ -1,0 +1,125 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Totem.GitHub.io</title>
+  <meta name="description" content="Totem documentation, issues, guides.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Totem.GitHub.io</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Totem documentation, issues, guides.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/totem" class="code">View Totem.GitHub.io on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a id="totem" class="anchor" href="#totem" aria-hidden="true"><span class="octicon octicon-link"></span></a>totem</h1>
+
+<p>Totem documentation, <a href="https://github.com/totem/totem/issues">issues (and feature requests)</a>, guides.</p>
+
+<h2>
+<a id="what-is-totem-" class="anchor" href="#what-is-totem-" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is totem ?</h2>
+
+<p>Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology (<a href="https://www.docker.com">Docker</a>).</p>
+
+<p>It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same (<a href="http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/">gitflow</a>, service discovery, containerization, centralized logging, and more...)</p>
+
+<h2>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+
+<h3>
+<a id="totem-flow" class="anchor" href="#totem-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem flow</h3>
+
+<p><img src="http://www.gliffy.com/go/publish/image/7041599/L.png" alt=""></p>
+
+<ul>
+<li>Developer commits file to git and pushes the changes to scm (e.g: <a href="https://github.com/">github</a>)</li>
+<li>Github triggers webhooks for push events to image builder tool e.g: <a href="https://github.com/totem/docker-image-factory">"Image Factory"</a> and CI tools like <a href="https://travis-ci.org">Travis</a>, <a href="https://www.atlassian.com/software/bamboo">Bamboo</a>.</li>
+<li>Once travis  (or any other ci) build  and image builder build finishes it notifies <a href="https://github.com/totem/cluster-orchestrator">orchestrator</a> about the status using post build webhooks.</li>
+<li>Orchestrator on receving any hook, loads/caches the configuration for the build (totem.yml). This file is loaded from <a href="http://aws.amazon.com/s3/">Amazon S3</a> (or <a href="https://coreos.com/using-coreos/etcd/">etcd</a>).</li>
+<li>Orchestrator on receving all the hooks with status as "success", it invokes deployer api to deploy the built image to <a href="https://coreos.com/">CoreOS cluster</a>.</li>
+<li>Deployer creates <a href="https://coreos.com/using-coreos/clustering">fleet</a> unit files for the application and submits the job to fleet daemon (running on CoreOS cluster). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.</li>
+</ul>
+
+<h3>
+<a id="application-deployment" class="anchor" href="#application-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="deployment.md">Application Deployment</a>
+</h3>
+
+<p>Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
+<img src="http://www.gliffy.com/go/publish/image/7051027/L.png" alt=""></p>
+
+<h2>
+<a id="reporting-bugs--feature-requests" class="anchor" href="#reporting-bugs--feature-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reporting Bugs / Feature Requests</h2>
+
+<p>Issues can be reported at :
+<a href="https://github.com/totem/totem/issues">https://github.com/totem/totem/issues</a></p>
+
+<h2>
+<a id="totem-components" class="anchor" href="#totem-components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Components</h2>
+
+<p>The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
+additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)</p>
+
+<ul>
+<li>
+<a href="https://github.com/totem/docker-image-factory"><strong>Image Factory</strong></a>: Responsible for building docker images using "Dockerfile" and push these to a central registry
+(e.g: Quay)</li>
+<li>
+<a href="https://github.com/totem/cluster-orchestrator"><strong>Orchestrator</strong></a>: Responsible for consuming hooks from different services (like Travis, Image Factory etc) and creating deployment requests to <em>Deployers</em> for configured clusters.</li>
+<li>
+<a href="https://github.com/totem/cluster-deployer"><strong>Deployer</strong></a>: Schedules the deployment to a cluster (currently CoreOS) and sets up the proxy hosts/listeners.</li>
+<li>
+<a href="https://github.com/totem/yoda-proxy"><strong>Yoda Proxy</strong></a>: Dynamic Haproxy backed by etcd.</li>
+<li>
+<a href="https://github.com/totem/yoda-discover"><strong>Yoda Discover</strong></a>: Acts as side kick for registering application unit to yoda proxy using etcd as backing store.
+Also provides ability to register yoda hosts to etcd.</li>
+<li>
+<a href="https://github.com/totem/yoda-discover"><strong>Yoda Route53</strong></a>: Registers the yoda hosts with Amazon Route 53 for DNS based load balancing for hosts.</li>
+<li>
+<a href="https://github.com/totem/fleet-templates"><strong>Fleet Templates</strong></a>: Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.</li>
+</ul>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+
+      <p><a href="https://github.com/totem" class="avatar"><img src="https://avatars3.githubusercontent.com/u/5487064?v=3&amp;s=60" width="48" height="48"></a>View <a href="https://github.com/totem">totem</a> on <a href="https://www.github.com">GitHub</a></p>
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/totem/totem.github.io/tarball/master" class="tar">tar</a><a href="https://github.com/totem/totem.github.io/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
