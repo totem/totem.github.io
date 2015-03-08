@@ -3,12 +3,13 @@ Totem is continous delivery pipline tool which is aimed in simplifying delivery 
 
 It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same ([gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/), service discovery, containerization, centralized logging, and more...)
 
-# Reporting Bugs / Feature Requests
+# Bugs / Feature Requests
 Issues can be reported at :
 [https://github.com/totem/totem.github.io/issues](https://github.com/totem/totem.github.io/issues)
+Issues may include help requests, bugs or feature requests. 
 
 # Architecture
-## Totem flow
+## High Level flow
 ![](http://www.gliffy.com/go/publish/image/7041599/L.png)
 * Developer commits file to git and pushes the changes to scm (e.g: [github](https://github.com/))
 * Github triggers webhooks for push events to image builder tool e.g: ["Image Factory"](https://github.com/totem/docker-image-factory) and CI tools like [Travis](https://travis-ci.org), [Bamboo](https://www.atlassian.com/software/bamboo).
@@ -21,7 +22,7 @@ Issues can be reported at :
 Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
 ![](http://www.gliffy.com/go/publish/image/7051027/L.png)
 
-# Totem Components
+## Components
 The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
 additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)
 
