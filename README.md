@@ -1,5 +1,5 @@
 # totem
-Repository for totem documentation, [issues (and feature requests)](https://github.com/totem/totem/issues), guides.
+Totem documentation, [issues (and feature requests)](https://github.com/totem/totem/issues), guides.
 
 ## What is totem ?
 Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology ([Docker](https://www.docker.com)).
