@@ -1,13 +1,14 @@
-# totem
-Totem documentation, [issues (and feature requests)](https://github.com/totem/totem/issues), guides.
-
-## What is totem ?
+# What is totem ?
 Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology ([Docker](https://www.docker.com)).
 
 It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same ([gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/), service discovery, containerization, centralized logging, and more...)
 
-## Architecture
-### Totem flow
+# Reporting Bugs / Feature Requests
+Issues can be reported at :
+[https://github.com/totem/totem/issues](https://github.com/totem/totem/issues)
+
+# Architecture
+## Totem flow
 ![](http://www.gliffy.com/go/publish/image/7041599/L.png)
 * Developer commits file to git and pushes the changes to scm (e.g: [github](https://github.com/))
 * Github triggers webhooks for push events to image builder tool e.g: ["Image Factory"](https://github.com/totem/docker-image-factory) and CI tools like [Travis](https://travis-ci.org), [Bamboo](https://www.atlassian.com/software/bamboo).
@@ -16,15 +17,11 @@ It was specifically designed for micro services/frameworks by utilizing practice
 * Orchestrator on receving all the hooks with status as "success", it invokes deployer api to deploy the built image to [CoreOS cluster](https://coreos.com/).
 * Deployer creates [fleet](https://coreos.com/using-coreos/clustering) unit files for the application and submits the job to fleet daemon (running on CoreOS cluster). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.
 
-### [Application Deployment](deployment.md)
+## [Application Deployment](deployment.md)
 Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
 ![](http://www.gliffy.com/go/publish/image/7051027/L.png)
 
-## Reporting Bugs / Feature Requests
-Issues can be reported at :
-[https://github.com/totem/totem/issues](https://github.com/totem/totem/issues)
-
-## Totem Components
+# Totem Components
 The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
 additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)
 
