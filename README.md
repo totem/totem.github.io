@@ -21,3 +21,17 @@ Totem is continous delivery pipline tool which is aimed in simplifying delivery 
 Issues can be reported at :
 [https://github.com/totem/totem/issues](https://github.com/totem/totem/issues)
 
+## Totem Components
+The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
+additional components for deploying applications to Totem (for e.g.: sidekicks for registering with SkyDNS)
+
+* [**Image Factory**](https://github.com/totem/docker-image-factory): Responsible for building docker images using "Dockerfile" and push these to a central registry
+  (e.g: Quay)
+* [**Orchestrator**](https://github.com/totem/cluster-orchestrator): Responsible for consuming hooks from different services (like Travis, Image Factory etc) and creating deployment requests to *Deployers* for configured clusters.
+* [**Deployer**](https://github.com/totem/cluster-deployer): Schedules the deployment to a cluster (currently CoreOS) and sets up the proxy hosts/listeners.
+* [**Yoda Proxy**](https://github.com/totem/yoda-proxy): Dynamic Haproxy backed by etcd.
+* [**Yoda Discover**](https://github.com/totem/yoda-discover): Acts as side kick for registering application unit to yoda proxy using etcd as backing store.
+  Also provides ability to register yoda hosts to etcd.
+* [**Yoda Route53**](https://github.com/totem/yoda-discover): Registers the yoda hosts with Amazon Route 53 for DNS based load balancing for hosts.
+* [**Fleet Templates**](https://github.com/totem/fleet-templates): Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.
+
