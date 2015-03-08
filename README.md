@@ -2,17 +2,19 @@
 Repository for totem documentation, issues, guides.
 
 ## What is totem ?
-Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code to any environment.
+Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology ([Docker](https://www.docker.com)).
+
+It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same.
 
 ## Architecture
 ### Totem flow
 ![](http://www.gliffy.com/go/publish/image/7041599/L.png)
 * Developer commits file to git and pushes the changes to scm (e.g: github)
-* Github triggers webhooks for push events to image builder tool e.g: "Image Factory" and CI tools e.g. Travis, Bamboo.
+* Github triggers webhooks for push events to image builder tool e.g: ["Image Factory"](https://github.com/totem/docker-image-factory) and CI tools like [Travis](https://travis-ci.org), [Bamboo](https://www.atlassian.com/software/bamboo).
 * Once travis  (or any other ci) build  and image builder build finishes it notifies orchestrator about the status using post build webhooks.
-* Orchestrator on receving any hook, loads/caches the configuration for the build (.totem.yml). This file is loaded from Amazon S3 (or etcd).
-* Orchestrator on receving all the hooks with status as "success", it invokes deployer api to deploy the built image to CoreOS cluster.
-* Deployer creates fleet unit files for the application and submits the job to fleet daemon (running on CoreOS clusteR). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.
+* Orchestrator on receving any hook, loads/caches the configuration for the build (.totem.yml). This file is loaded from [Amazon S3](http://aws.amazon.com/s3/) (or [etcd](https://coreos.com/using-coreos/etcd/)).
+* Orchestrator on receving all the hooks with status as "success", it invokes deployer api to deploy the built image to [CoreOS cluster](https://coreos.com/).
+* Deployer creates [fleet](https://coreos.com/using-coreos/clustering) unit files for the application and submits the job to fleet daemon (running on CoreOS cluster). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.
 
 ### [Application Deployment](deployment.md)
 Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
