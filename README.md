@@ -5,7 +5,7 @@ It was specifically designed for micro services/frameworks by utilizing practice
 
 # Reporting Bugs / Feature Requests
 Issues can be reported at :
-[https://github.com/totem/totem/issues](https://github.com/totem/totem/issues)
+[https://github.com/totem/totem.github.io/issues](https://github.com/totem/totem.github.io/issues)
 
 # Architecture
 ## Totem flow
