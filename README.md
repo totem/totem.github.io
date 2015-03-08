@@ -15,6 +15,7 @@ Totem is continous delivery pipline tool which is aimed in simplifying delivery 
 * Deployer creates fleet unit files for the application and submits the job to fleet daemon (running on CoreOS clusteR). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.
 
 ### [Application Deployment](deployment.md)
+Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
 ![](http://www.gliffy.com/go/publish/image/7051027/L.png)
 
 ## Reporting Bugs / Feature Requests
@@ -23,7 +24,7 @@ Issues can be reported at :
 
 ## Totem Components
 The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
-additional components for deploying applications to Totem (for e.g.: sidekicks for registering with SkyDNS)
+additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)
 
 * [**Image Factory**](https://github.com/totem/docker-image-factory): Responsible for building docker images using "Dockerfile" and push these to a central registry
   (e.g: Quay)
