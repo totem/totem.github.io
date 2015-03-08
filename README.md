@@ -3,7 +3,7 @@ Totem is continous delivery pipline tool which is aimed in simplifying delivery 
 
 It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same ([gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/), service discovery, containerization, centralized logging, and more...)
 
-# Bugs / Feature Requests
+# Reporting Issues
 Issues can be reported at :
 [https://github.com/totem/totem.github.io/issues](https://github.com/totem/totem.github.io/issues)
 Issues may include help requests, bugs or feature requests. 
