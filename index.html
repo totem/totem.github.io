@@ -1,54 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Totem.GitHub.io by totem</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Totem.GitHub.io : Totem documentation, issues, guides.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Totem.GitHub.io</title>
   </head>
+
   <body>
 
-      <header>
-        <h1>Totem.GitHub.io</h1>
-        <p>Totem documentation, issues, guides.</p>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/totem">View on GitHub</a>
 
-      <div id="banner">
-        <span id="logo"></span>
+          <h1 id="project_title">Totem.GitHub.io</h1>
+          <h2 id="project_tagline">Totem documentation, issues, guides.</h2>
 
-        <a href="https://github.com/totem" class="button fork"><strong>View On GitHub</strong></a>
-      </div><!-- end banner -->
+        </header>
+    </div>
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
-<a id="totem" class="anchor" href="#totem" aria-hidden="true"><span class="octicon octicon-link"></span></a>totem</h1>
-
-<p>Totem documentation, <a href="https://github.com/totem/totem/issues">issues (and feature requests)</a>, guides.</p>
-
-<h2>
-<a id="what-is-totem-" class="anchor" href="#what-is-totem-" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is totem ?</h2>
+<a id="what-is-totem-" class="anchor" href="#what-is-totem-" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is totem ?</h1>
 
 <p>Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology (<a href="https://www.docker.com">Docker</a>).</p>
 
 <p>It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same (<a href="http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/">gitflow</a>, service discovery, containerization, centralized logging, and more...)</p>
 
-<h2>
-<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h2>
+<h1>
+<a id="reporting-bugs--feature-requests" class="anchor" href="#reporting-bugs--feature-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reporting Bugs / Feature Requests</h1>
 
-<h3>
-<a id="totem-flow" class="anchor" href="#totem-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem flow</h3>
+<p>Issues can be reported at :
+<a href="https://github.com/totem/totem/issues">https://github.com/totem/totem/issues</a></p>
+
+<h1>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h1>
+
+<h2>
+<a id="totem-flow" class="anchor" href="#totem-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem flow</h2>
 
 <p><img src="http://www.gliffy.com/go/publish/image/7041599/L.png" alt=""></p>
 
@@ -61,21 +57,15 @@
 <li>Deployer creates <a href="https://coreos.com/using-coreos/clustering">fleet</a> unit files for the application and submits the job to fleet daemon (running on CoreOS cluster). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.</li>
 </ul>
 
-<h3>
+<h2>
 <a id="application-deployment" class="anchor" href="#application-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="deployment.md">Application Deployment</a>
-</h3>
+</h2>
 
 <p>Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
 <img src="http://www.gliffy.com/go/publish/image/7051027/L.png" alt=""></p>
 
-<h2>
-<a id="reporting-bugs--feature-requests" class="anchor" href="#reporting-bugs--feature-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reporting Bugs / Feature Requests</h2>
-
-<p>Issues can be reported at :
-<a href="https://github.com/totem/totem/issues">https://github.com/totem/totem/issues</a></p>
-
-<h2>
-<a id="totem-components" class="anchor" href="#totem-components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Components</h2>
+<h1>
+<a id="totem-components" class="anchor" href="#totem-components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Components</h1>
 
 <p>The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
 additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)</p>
@@ -99,11 +89,16 @@ Also provides ability to register yoda hosts to etcd.</li>
 <a href="https://github.com/totem/fleet-templates"><strong>Fleet Templates</strong></a>: Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.</li>
 </ul>
       </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     
+
   </body>
 </html>
