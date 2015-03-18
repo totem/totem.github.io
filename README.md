@@ -37,4 +37,4 @@ additional components for deploying applications using Totem (for e.g.: sidekick
 * [**Fleet Templates**](https://github.com/totem/fleet-templates): Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.
 
 ## Totem Config
-The totem configuration file is typically defined to configure applications deployed in totem. The complete reference can be found [here](config).
+The totem configuration file is typically defined to configure applications deployed in totem. The complete reference can be found [here](https://github.com/totem/totem.github.io/tree/master/config).
