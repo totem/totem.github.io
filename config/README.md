@@ -27,8 +27,40 @@ All except (default and github) provider support multi level config where in the
   
 ## Config Merge
 During a deploy, all configs (multiple files, multiple locations) are merged into a single config that typically
-gets cached in etcd store. The merge is performed using nested merge strategy. with config keys defined at branch
+gets cached in etcd store. The merge is performed using nested merge strategy with config keys defined at branch
 or tag level takes the highest precendence while the one defined globally takes the lowest precendence. In addition
 if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over
 the one occuring later.
 
+e.g. Given 2 configs:
+
+```yaml
+deployer:
+  deployer1:
+    enabled: true
+  deployer2:
+    enabled: false
+```  
+```yaml
+deployer:
+  deployer1:
+    enabled: false
+  deployer3:
+    enabled: true
+```  
+
+When we merge the 2 configs, the resulting config looks like:
+```yaml
+deployer:
+  deployer1:
+    enabled: true
+  deployer2:
+    enabled: true
+  deployer3:
+    enabled: true
+```  
+
+## Config Schema
+Totem config is validated using [json schema](http://json-schema.org/). Currently there are 2 schemas defined for validation:
+- [job-config-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1.json): This schema corresponds to first step in validation phase. This step is applied after all configs are merged to create a single config.
+- [job-config-evaluated-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1-evaluated.json): This schema corresponds to second step in validation phase. This step is applied after dynamic portions of configs are evaluated.
