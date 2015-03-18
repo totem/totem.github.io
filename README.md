@@ -36,3 +36,5 @@ additional components for deploying applications using Totem (for e.g.: sidekick
 * [**Yoda Route53**](https://github.com/totem/yoda-discover): Registers the yoda hosts with Amazon Route 53 for DNS based load balancing for hosts.
 * [**Fleet Templates**](https://github.com/totem/fleet-templates): Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.
 
+## Totem Config
+The totem configuration file is typically defined to configure applications deployed in totem. The complete reference can be found [here](config).
