@@ -122,7 +122,7 @@ Totem config is validated using [json schema](http://json-schema.org/). Currentl
 - [job-config-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1.json): This schema corresponds to first step in validation phase. This step is applied after all configs are merged to create a single config.
 - [job-config-evaluated-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1-evaluated.json): This schema corresponds to second step in validation phase. This step is applied after dynamic portions of configs are evaluated.
 
-## Config Elemenets
+## Config Elements
 ### variables
 #### Variables Overview
 Defines the dynamic values that gets substituted in dynamic section of a given config. Basically it acts as variables for jinja substitution. Refer dynamic section for more details.
@@ -150,12 +150,20 @@ variables:
     priority: 2
 ```
 In this example the value of variable public_host is evaluated using the value of private_host.
-## security
+
+### security
 This section defines the security settings to be used globally or per application. By default, a 'default' security profile is defined. e.g.:
 ```yaml
 security:
   profile: myapp
 ```
 In the above example security profile is changed from 'default' to 'myapp'.  Refer [Encrypted Values](README.md#encrypted-values) section to kno more about encryption.
-  
 
+### deployers
+This section defines one or more deployer definition.  Each deployer definition consists of different settings to be used for deploying given application and url of the deployer. Typically, the urls can be defined in separate totem file (cluster-def.yml), while the applications specific settings can be added in totem.yml file.
+
+### hooks
+This section defines one or more hooks that is being enabled for the given application. The hooks may be a CI hook or builder hook.
+
+### notifications
+This section define one or more notifiers (e.g: github, hipchat) to be used for given application to send success/failed notifications.
