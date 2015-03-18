@@ -98,8 +98,64 @@ deployer:
     enabled: true
 ```  
 
+## Encrypted Values
+Some sections of totem config can contain encrypted values. It uses asymmetric cryptography using PKCS#1 v1.5. Refer to [cluster-deployer](https://github.com/totem/cluster-deploer) guide to enable encryption for a given cluster.
+The cluster deployer uses different profiles for encryption. See [Config Schema - Security Section](README.md#security) for defining a security profile. The name of default profile is 'default'.
+
+If a given config supports encryption, set encrypted property for the config element to true.
+e.g.: 
+```
+deployers:
+  default:
+    templates:
+      app:
+        args:
+          environment:
+            AWS_SECRET_ACCESS_KEY:
+              value: "*****encrypted value******"
+              encrypted: true
+```
+In this example, the environment variable "AWS_SECRET_ACCESS_KEY" is injected into the application and its value is marked as injected. The value is decrypted at the final stage of deploy when fleet unit file is created.
+
 ## Config Schema
 Totem config is validated using [json schema](http://json-schema.org/). Currently there are 2 schemas defined for validation:
 - [job-config-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1.json): This schema corresponds to first step in validation phase. This step is applied after all configs are merged to create a single config.
 - [job-config-evaluated-v1.json](https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1-evaluated.json): This schema corresponds to second step in validation phase. This step is applied after dynamic portions of configs are evaluated.
+
+## Config Elemenets
+### variables
+#### Variables Overview
+Defines the dynamic values that gets substituted in dynamic section of a given config. Basically it acts as variables for jinja substitution. Refer dynamic section for more details.
+e.g.:
+```yaml
+variables:
+  public_host: myapp.myhost.com
+  
+proxy:
+  hosts:
+    public:
+      hostname:
+        value: "{{public_host}}"
+```
+In this example, the value of hostname is substituted by myapp.myhost.com when config is evaluated.
+
+#### Templated variables
+The variables values itself can be evaluated dynamically using jinja templates. The variables are evaluated in order defined by their priority (Variables with lower priority are evaluated first).
+e.g.:
+```yaml
+variables:
+  private_host: myapp.myhost.com
+  public_host:
+    value: "{{public_host}}"
+    priority: 2
+```
+In this example the value of variable public_host is evaluated using the value of private_host.
+## security
+This section defines the security settings to be used globally or per application. By default, a 'default' security profile is defined. e.g.:
+```yaml
+security:
+  profile: myapp
+```
+In the above example security profile is changed from 'default' to 'myapp'.  Refer [Encrypted Values](README.md#encrypted-values) section to kno more about encryption.
+  
 
