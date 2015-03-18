@@ -210,7 +210,7 @@ e.g.: </p>
 </ul>
 
 <h2>
-<a id="config-elemenets" class="anchor" href="#config-elemenets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Elemenets</h2>
+<a id="config-elements" class="anchor" href="#config-elements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Elements</h2>
 
 <h3>
 <a id="variables" class="anchor" href="#variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>variables</h3>
@@ -246,8 +246,8 @@ e.g.:</p>
 
 <p>In this example the value of variable public_host is evaluated using the value of private_host.</p>
 
-<h2>
-<a id="security" class="anchor" href="#security" aria-hidden="true"><span class="octicon octicon-link"></span></a>security</h2>
+<h3>
+<a id="security" class="anchor" href="#security" aria-hidden="true"><span class="octicon octicon-link"></span></a>security</h3>
 
 <p>This section defines the security settings to be used globally or per application. By default, a 'default' security profile is defined. e.g.:</p>
 
@@ -255,6 +255,21 @@ e.g.:</p>
   <span class="pl-s1"><span class="pl-ent">profile:</span> <span class="pl-s1">myapp</span></span></pre></div>
 
 <p>In the above example security profile is changed from 'default' to 'myapp'.  Refer <a href="README.md#encrypted-values">Encrypted Values</a> section to kno more about encryption.</p>
+
+<h3>
+<a id="deployers" class="anchor" href="#deployers" aria-hidden="true"><span class="octicon octicon-link"></span></a>deployers</h3>
+
+<p>This section defines one or more deployer definition.  Each deployer definition consists of different settings to be used for deploying given application and url of the deployer. Typically, the urls can be defined in separate totem file (cluster-def.yml), while the applications specific settings can be added in totem.yml file.</p>
+
+<h3>
+<a id="hooks" class="anchor" href="#hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>hooks</h3>
+
+<p>This section defines one or more hooks that is being enabled for the given application. The hooks may be a CI hook or builder hook.</p>
+
+<h3>
+<a id="notifications" class="anchor" href="#notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>notifications</h3>
+
+<p>This section define one or more notifiers (e.g: github, hipchat) to be used for given application to send success/failed notifications.</p>
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
