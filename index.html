@@ -176,6 +176,28 @@ the one occuring later.</p>
     <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span></pre></div>
 
 <h2>
+<a id="encrypted-values" class="anchor" href="#encrypted-values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encrypted Values</h2>
+
+<p>Some sections of totem config can contain encrypted values. It uses asymmetric cryptography using PKCS#1 v1.5. Refer to <a href="https://github.com/totem/cluster-deploer">cluster-deployer</a> guide to enable encryption for a given cluster.
+The cluster deployer uses different profiles for encryption. See <a href="README.md#security">Config Schema - Security Section</a> for defining a security profile. The name of default profile is 'default'.</p>
+
+<p>If a given config supports encryption, set encrypted property for the config element to true.
+e.g.: </p>
+
+<pre><code>deployers:
+  default:
+    templates:
+      app:
+        args:
+          environment:
+            AWS_SECRET_ACCESS_KEY:
+              value: "*****encrypted value******"
+              encrypted: true
+</code></pre>
+
+<p>In this example, the environment variable "AWS_SECRET_ACCESS_KEY" is injected into the application and its value is marked as injected. The value is decrypted at the final stage of deploy when fleet unit file is created.</p>
+
+<h2>
 <a id="config-schema" class="anchor" href="#config-schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Schema</h2>
 
 <p>Totem config is validated using <a href="http://json-schema.org/">json schema</a>. Currently there are 2 schemas defined for validation:</p>
@@ -186,6 +208,53 @@ the one occuring later.</p>
 <li>
 <a href="https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1-evaluated.json">job-config-evaluated-v1.json</a>: This schema corresponds to second step in validation phase. This step is applied after dynamic portions of configs are evaluated.</li>
 </ul>
+
+<h2>
+<a id="config-elemenets" class="anchor" href="#config-elemenets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Elemenets</h2>
+
+<h3>
+<a id="variables" class="anchor" href="#variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>variables</h3>
+
+<h4>
+<a id="variables-overview" class="anchor" href="#variables-overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables Overview</h4>
+
+<p>Defines the dynamic values that gets substituted in dynamic section of a given config. Basically it acts as variables for jinja substitution. Refer dynamic section for more details.
+e.g.:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">variables:</span></span>
+  <span class="pl-s1"><span class="pl-ent">public_host:</span> <span class="pl-s1">myapp.myhost.com</span></span>
+
+<span class="pl-s1"><span class="pl-ent">proxy:</span></span>
+  <span class="pl-s1"><span class="pl-ent">hosts:</span></span>
+    <span class="pl-s1"><span class="pl-ent">public:</span></span>
+      <span class="pl-s1"><span class="pl-ent">hostname:</span></span>
+        <span class="pl-s1"><span class="pl-ent">value:</span> <span class="pl-s1"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span></pre></div>
+
+<p>In this example, the value of hostname is substituted by myapp.myhost.com when config is evaluated.</p>
+
+<h4>
+<a id="templated-variables" class="anchor" href="#templated-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templated variables</h4>
+
+<p>The variables values itself can be evaluated dynamically using jinja templates. The variables are evaluated in order defined by their priority (Variables with lower priority are evaluated first).
+e.g.:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">variables:</span></span>
+  <span class="pl-s1"><span class="pl-ent">private_host:</span> <span class="pl-s1">myapp.myhost.com</span></span>
+  <span class="pl-s1"><span class="pl-ent">public_host:</span></span>
+    <span class="pl-s1"><span class="pl-ent">value:</span> <span class="pl-s1"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span>
+    <span class="pl-c1"><span class="pl-ent">priority:</span> 2</span></pre></div>
+
+<p>In this example the value of variable public_host is evaluated using the value of private_host.</p>
+
+<h2>
+<a id="security" class="anchor" href="#security" aria-hidden="true"><span class="octicon octicon-link"></span></a>security</h2>
+
+<p>This section defines the security settings to be used globally or per application. By default, a 'default' security profile is defined. e.g.:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">security:</span></span>
+  <span class="pl-s1"><span class="pl-ent">profile:</span> <span class="pl-s1">myapp</span></span></pre></div>
+
+<p>In the above example security profile is changed from 'default' to 'myapp'.  Refer <a href="README.md#encrypted-values">Encrypted Values</a> section to kno more about encryption.</p>
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
