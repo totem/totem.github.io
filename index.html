@@ -96,9 +96,96 @@ Also provides ability to register yoda hosts to etcd.</li>
 </ul>
 
 <h1>
-<a id="totem-config" class="anchor" href="#totem-config" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Config</h1>
+<a id="totem-config-guide" class="anchor" href="#totem-config-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Config Guide</h1>
 
-<p>The totem configuration file is typically defined to configure applications deployed in totem. The complete reference can be found <a href="https://github.com/totem/totem.github.io/tree/master/config">here</a>.</p>
+<h2>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p>This guide covers the basics of totem configuration file used per deployed application in totem.</p>
+
+<h2>
+<a id="supported-formats" class="anchor" href="#supported-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported Formats</h2>
+
+<p>Currently <a href="http://yaml.org/">YAML</a> is the only supported configuration format used in totem.</p>
+
+<h2>
+<a id="config-names" class="anchor" href="#config-names" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Names</h2>
+
+<p>The totem configuration file names can be be configured during orchestrator provisioning. By default following names
+are used:</p>
+
+<ul>
+<li>
+<strong>cluster-def.yml</strong> : Typically used at global level to define cluster definition.</li>
+<li>
+<strong>totem.yml</strong>: Typically used at global/application level for defining rest of config.<br>
+<em>Note: You may break the config into multiple files if needed. In the end , all configs are merged into a single file
+during deployment</em>
+</li>
+</ul>
+
+<h2>
+<a id="config-location" class="anchor" href="#config-location" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Location</h2>
+
+<p>The config can be stored in one or more locations defined by env. variable <strong>CONFIG_PROVIDER_LIST</strong> in orchestrator.
+<em>Note: If using AWS, typical approach is to store config in Amazon S3. CONFIG_PROVIDER_LIST=s3</em>
+All except (default and github) provider support multi level config where in the config file can be defined:</p>
+
+<ul>
+<li>Globally (for all environments ) at path: <strong>/totem/config</strong>
+</li>
+<li>Per environment at path: <strong>/totem/config/[env-name]</strong>  e.g.:  /totem/config/production</li>
+<li>Per Repository owner at path: <strong>/totem/config/[env-name]/[repo-owner]</strong> e.g.: /totem/config/production/totem</li>
+<li>Per Repository at path: <strong>/totem/config/[env-name]/[repo-owner]/[repository]</strong>
+e.g.: /totem/config/production/totem/totem-demo</li>
+<li>Per Repository branch or tag: <strong>/totem/config/[env-name]/[repo-owner]/[repository]/[ref]</strong>
+e.g.: /totem/config/production/totem/totem-demo/develop</li>
+</ul>
+
+<h2>
+<a id="config-merge" class="anchor" href="#config-merge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Merge</h2>
+
+<p>During a deploy, all configs (multiple files, multiple locations) are merged into a single config that typically
+gets cached in etcd store. The merge is performed using nested merge strategy with config keys defined at branch
+or tag level takes the highest precendence while the one defined globally takes the lowest precendence. In addition
+if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over
+the one occuring later.</p>
+
+<p>e.g. Given 2 configs:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer2:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">false</span></span></pre></div>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">false</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer3:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span></pre></div>
+
+<p>When we merge the 2 configs, the resulting config looks like:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer2:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
+  <span class="pl-s1"><span class="pl-ent">deployer3:</span></span>
+    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span></pre></div>
+
+<h2>
+<a id="config-schema" class="anchor" href="#config-schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Schema</h2>
+
+<p>Totem config is validated using <a href="http://json-schema.org/">json schema</a>. Currently there are 2 schemas defined for validation:</p>
+
+<ul>
+<li>
+<a href="https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1.json">job-config-v1.json</a>: This schema corresponds to first step in validation phase. This step is applied after all configs are merged to create a single config.</li>
+<li>
+<a href="https://github.com/totem/cluster-orchestrator/blob/master/schemas/job-config-v1-evaluated.json">job-config-evaluated-v1.json</a>: This schema corresponds to second step in validation phase. This step is applied after dynamic portions of configs are evaluated.</li>
+</ul>
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
