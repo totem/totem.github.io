@@ -100,7 +100,7 @@ deployer:
 
 ## Encrypted Values
 Some sections of totem config can contain encrypted values. It uses asymmetric cryptography using PKCS#1 v1.5. Refer to [cluster-deployer](https://github.com/totem/cluster-deployer) guide to enable encryption for a given cluster.
-The cluster deployer uses different profiles for encryption. See [Config Schema - Security Section](README.md#security) for defining a security profile. The name of default profile is 'default'.
+The cluster deployer uses different profiles for encryption. See [Config Schema - Security Section](#security) for defining a security profile. The name of default profile is 'default'.
 
 If a given config supports encryption, set encrypted property for the config element to true.
 e.g.: 
