@@ -153,33 +153,33 @@ the one occuring later.</p>
 
 <p>e.g. Given 2 configs:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer2:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">false</span></span></pre></div>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">true</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer2:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">false</span></span></pre></div>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">false</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer3:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span></pre></div>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">false</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer3:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">true</span></span></pre></div>
 
 <p>When we merge the 2 configs, the resulting config looks like:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">deployer:</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer1:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer2:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span>
-  <span class="pl-s1"><span class="pl-ent">deployer3:</span></span>
-    <span class="pl-s1"><span class="pl-ent">enabled:</span> <span class="pl-s1">true</span></span></pre></div>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">deployer:</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer1:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">true</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer2:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">true</span></span>
+  <span class="pl-s"><span class="pl-ent">deployer3:</span></span>
+    <span class="pl-s"><span class="pl-ent">enabled:</span> <span class="pl-s">true</span></span></pre></div>
 
 <h2>
 <a id="encrypted-values" class="anchor" href="#encrypted-values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Encrypted Values</h2>
 
-<p>Some sections of totem config can contain encrypted values. It uses asymmetric cryptography using PKCS#1 v1.5. Refer to <a href="https://github.com/totem/cluster-deploer">cluster-deployer</a> guide to enable encryption for a given cluster.
-The cluster deployer uses different profiles for encryption. See <a href="README.md#security">Config Schema - Security Section</a> for defining a security profile. The name of default profile is 'default'.</p>
+<p>Some sections of totem config can contain encrypted values. It uses asymmetric cryptography using PKCS#1 v1.5. Refer to <a href="https://github.com/totem/cluster-deployer">cluster-deployer</a> guide to enable encryption for a given cluster.
+The cluster deployer uses different profiles for encryption. See <a href="#security">Config Schema - Security Section</a> for defining a security profile. The name of default profile is 'default'.</p>
 
 <p>If a given config supports encryption, set encrypted property for the config element to true.
 e.g.: </p>
@@ -221,14 +221,14 @@ e.g.: </p>
 <p>Defines the dynamic values that gets substituted in dynamic section of a given config. Basically it acts as variables for jinja substitution. Refer dynamic section for more details.
 e.g.:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">variables:</span></span>
-  <span class="pl-s1"><span class="pl-ent">public_host:</span> <span class="pl-s1">myapp.myhost.com</span></span>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">variables:</span></span>
+  <span class="pl-s"><span class="pl-ent">public_host:</span> <span class="pl-s">myapp.myhost.com</span></span>
 
-<span class="pl-s1"><span class="pl-ent">proxy:</span></span>
-  <span class="pl-s1"><span class="pl-ent">hosts:</span></span>
-    <span class="pl-s1"><span class="pl-ent">public:</span></span>
-      <span class="pl-s1"><span class="pl-ent">hostname:</span></span>
-        <span class="pl-s1"><span class="pl-ent">value:</span> <span class="pl-s1"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span></pre></div>
+<span class="pl-s"><span class="pl-ent">proxy:</span></span>
+  <span class="pl-s"><span class="pl-ent">hosts:</span></span>
+    <span class="pl-s"><span class="pl-ent">public:</span></span>
+      <span class="pl-s"><span class="pl-ent">hostname:</span></span>
+        <span class="pl-s"><span class="pl-ent">value:</span> <span class="pl-s"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span></pre></div>
 
 <p>In this example, the value of hostname is substituted by myapp.myhost.com when config is evaluated.</p>
 
@@ -238,10 +238,10 @@ e.g.:</p>
 <p>The variables values itself can be evaluated dynamically using jinja templates. The variables are evaluated in order defined by their priority (Variables with lower priority are evaluated first).
 e.g.:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">variables:</span></span>
-  <span class="pl-s1"><span class="pl-ent">private_host:</span> <span class="pl-s1">myapp.myhost.com</span></span>
-  <span class="pl-s1"><span class="pl-ent">public_host:</span></span>
-    <span class="pl-s1"><span class="pl-ent">value:</span> <span class="pl-s1"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">variables:</span></span>
+  <span class="pl-s"><span class="pl-ent">private_host:</span> <span class="pl-s">myapp.myhost.com</span></span>
+  <span class="pl-s"><span class="pl-ent">public_host:</span></span>
+    <span class="pl-s"><span class="pl-ent">value:</span> <span class="pl-s"><span class="pl-pds">"</span>{{public_host}}<span class="pl-pds">"</span></span></span>
     <span class="pl-c1"><span class="pl-ent">priority:</span> 2</span></pre></div>
 
 <p>In this example the value of variable public_host is evaluated using the value of private_host.</p>
@@ -251,8 +251,8 @@ e.g.:</p>
 
 <p>This section defines the security settings to be used globally or per application. By default, a 'default' security profile is defined. e.g.:</p>
 
-<div class="highlight highlight-yaml"><pre><span class="pl-s1"><span class="pl-ent">security:</span></span>
-  <span class="pl-s1"><span class="pl-ent">profile:</span> <span class="pl-s1">myapp</span></span></pre></div>
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">security:</span></span>
+  <span class="pl-s"><span class="pl-ent">profile:</span> <span class="pl-s">myapp</span></span></pre></div>
 
 <p>In the above example security profile is changed from 'default' to 'myapp'.  Refer <a href="README.md#encrypted-values">Encrypted Values</a> section to kno more about encryption.</p>
 
