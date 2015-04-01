@@ -36,6 +36,37 @@ additional components for deploying applications using Totem (for e.g.: sidekick
 * [**Yoda Route53**](https://github.com/totem/yoda-discover): Registers the yoda hosts with Amazon Route 53 for DNS based load balancing for hosts.
 * [**Fleet Templates**](https://github.com/totem/fleet-templates): Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.
 
+# Totem Events
+
+## Overview
+The different totem components (deployer, orchestrator) publishes events to elasticsearch (if enabled).  Here is an example event: 
+```json
+{
+    "date": "2015-04-01T06:25:06.389047",
+    "type": "NEW_JOB",
+    "component": "orchestrator",
+    "meta-info": {
+      "git": {
+        "owner": "meltmedia",
+        "repo": "totem-demo",
+        "ref": "master",
+        "commit": "87c4419d3e278036055ca2cd022583e0397d3a5d"
+      },
+      "job-id": "9be083a1-9fc2-48b3-83bc-e11c8bbab305"
+    },
+    "details": {
+    }
+}
+```
+
+## Event fields
+Every event consists of following fields:
+* *date*:  Timestamp for event
+* *type*:  Event type
+* *component*: Totem component that generated the event (orchestrator, deployer).
+* *meta-info*: Meta info associated with the event. Typically it comprises of git meta-data and job identifier.
+* *details*: The detailed json object describing the event.
+
 # Totem Config Guide
 ## About
 This guide covers the basics of totem configuration file used per deployed application in totem.
