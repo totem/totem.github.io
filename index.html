@@ -96,6 +96,49 @@ Also provides ability to register yoda hosts to etcd.</li>
 </ul>
 
 <h1>
+<a id="totem-events" class="anchor" href="#totem-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Events</h1>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>The different totem components (deployer, orchestrator) publishes events to elasticsearch (if enabled).  Here is an example event: </p>
+
+<div class="highlight highlight-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>date<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2015-04-01T06:25:06.389047<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>NEW_JOB<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>component<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>orchestrator<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>meta-info<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>git<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>owner<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>meltmedia<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>repo<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>totem-demo<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>ref<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>master<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>commit<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>87c4419d3e278036055ca2cd022583e0397d3a5d<span class="pl-pds">"</span></span>
+      },
+      <span class="pl-s"><span class="pl-pds">"</span>job-id<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>9be083a1-9fc2-48b3-83bc-e11c8bbab305<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>details<span class="pl-pds">"</span></span>: {
+    }
+}</pre></div>
+
+<h2>
+<a id="event-fields" class="anchor" href="#event-fields" aria-hidden="true"><span class="octicon octicon-link"></span></a>Event fields</h2>
+
+<p>Every event consists of following fields:</p>
+
+<ul>
+<li>
+<em>date</em>:  Timestamp for event</li>
+<li>
+<em>type</em>:  Event type</li>
+<li>
+<em>component</em>: Totem component that generated the event (orchestrator, deployer).</li>
+<li>
+<em>meta-info</em>: Meta info associated with the event. Typically it comprises of git meta-data and job identifier.</li>
+<li>
+<em>details</em>: The detailed json object describing the event.</li>
+</ul>
+
+<h1>
 <a id="totem-config-guide" class="anchor" href="#totem-config-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Totem Config Guide</h1>
 
 <h2>
