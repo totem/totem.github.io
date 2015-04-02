@@ -91,15 +91,12 @@ All except (default and github) provider support multi level config where in the
 - Per Repository owner at path: **/totem/config/[env-name]/[repo-owner]** e.g.: /totem/config/production/totem
 - Per Repository at path: **/totem/config/[env-name]/[repo-owner]/[repository]**
   e.g.: /totem/config/production/totem/totem-demo
-- Per Repository branch or tag: **/totem/config/[env-name]/[repo-owner]/[repository]/[ref]**
+- Per Repository branch/tag: **/totem/config/[env-name]/[repo-owner]/[repository]/[ref]**
   e.g.: /totem/config/production/totem/totem-demo/develop
   
 ## Config Merge
 During a deploy, all configs (multiple files, multiple locations) are merged into a single config that typically
-gets cached in etcd store. The merge is performed using nested merge strategy with config keys defined at branch
-or tag level takes the highest precendence while the one defined globally takes the lowest precendence. In addition
-if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over
-the one occuring later.
+gets cached in etcd store. The merge is performed using nested merge strategy in which config keys defined at branch/tag level takes highest precendence while the one defined globally takes the lowest precendence. In addition if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over the one occuring later.
 
 e.g. Given 2 configs:
 
@@ -170,7 +167,7 @@ proxy:
 ```
 In this example, the value of hostname is substituted by myapp.myhost.com when config is evaluated.
 
-#### Templated variables
+#### Template variables
 The variables values itself can be evaluated dynamically using jinja templates. The variables are evaluated in order defined by their priority (Variables with lower priority are evaluated first).
 e.g.:
 ```yaml
