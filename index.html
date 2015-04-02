@@ -181,7 +181,7 @@ All except (default and github) provider support multi level config where in the
 <li>Per Repository owner at path: <strong>/totem/config/[env-name]/[repo-owner]</strong> e.g.: /totem/config/production/totem</li>
 <li>Per Repository at path: <strong>/totem/config/[env-name]/[repo-owner]/[repository]</strong>
 e.g.: /totem/config/production/totem/totem-demo</li>
-<li>Per Repository branch or tag: <strong>/totem/config/[env-name]/[repo-owner]/[repository]/[ref]</strong>
+<li>Per Repository branch/tag: <strong>/totem/config/[env-name]/[repo-owner]/[repository]/[ref]</strong>
 e.g.: /totem/config/production/totem/totem-demo/develop</li>
 </ul>
 
@@ -189,10 +189,7 @@ e.g.: /totem/config/production/totem/totem-demo/develop</li>
 <a id="config-merge" class="anchor" href="#config-merge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Config Merge</h2>
 
 <p>During a deploy, all configs (multiple files, multiple locations) are merged into a single config that typically
-gets cached in etcd store. The merge is performed using nested merge strategy with config keys defined at branch
-or tag level takes the highest precendence while the one defined globally takes the lowest precendence. In addition
-if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over
-the one occuring later.</p>
+gets cached in etcd store. The merge is performed using nested merge strategy in which config keys defined at branch/tag level takes highest precendence while the one defined globally takes the lowest precendence. In addition if multiple config providers are defined e.g. (etcd,s3,default), the provider occuring first takes precendence over the one occuring later.</p>
 
 <p>e.g. Given 2 configs:</p>
 
@@ -276,7 +273,7 @@ e.g.:</p>
 <p>In this example, the value of hostname is substituted by myapp.myhost.com when config is evaluated.</p>
 
 <h4>
-<a id="templated-variables" class="anchor" href="#templated-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templated variables</h4>
+<a id="template-variables" class="anchor" href="#template-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Template variables</h4>
 
 <p>The variables values itself can be evaluated dynamically using jinja templates. The variables are evaluated in order defined by their priority (Variables with lower priority are evaluated first).
 e.g.:</p>
