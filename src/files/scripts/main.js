@@ -20,8 +20,6 @@ $(document).ready(function(){
     var position = $($(this).attr("href")).offset().top - offset;
 
     $("html, body").animate({scrollTop: position}, 400);
-    $(".content-nav .anchor-links li a").parent().removeClass("active");
-    $(this).parent().addClass("active");
     event.preventDefault();
   });
 

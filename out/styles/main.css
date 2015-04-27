@@ -144,13 +144,22 @@ a:visited {
   }
 }
 .anchor-links li {
-  border-right: 2px solid transparent;
+  border-color: transparent;
+  border-style: solid;
   margin-bottom: 5px;
-  transition: border-right-color 0.2s ease-in-out, padding-right 0.2s ease-in-out;
+  border-width: 0;
+  transition: padding-right 0.1s ease-in-out;
 }
 .anchor-links li.active {
-  border-right-color: #0670c5;
+  border-color: #0670c5;
+  border-bottom-width: 2px;
   padding-right: 10px;
+}
+@media screen and (min-width: 48em) {
+  .anchor-links li.active {
+    border-bottom-width: 0;
+    border-right-width: 2px;
+  }
 }
 .anchor-links .tag-h1 {
   font-weight: bold;

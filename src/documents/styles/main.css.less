@@ -156,14 +156,21 @@ a {
   }
 
   li {
-    border-right: 2px solid transparent;
+    border-color: transparent;
+    border-style: solid;
     margin-bottom: 5px;
-    transition: border-right-color .2s ease-in-out,
-                padding-right .2s ease-in-out;
+    border-width: 0;
+    transition: padding-right .1s ease-in-out;
 
     &.active {
-      border-right-color: @blue;
+      border-color: @blue;
+      border-bottom-width: 2px;
       padding-right: 10px;
+
+      @media screen and (min-width: @md) {
+        border-bottom-width: 0;
+        border-right-width: 2px;
+      }
     }
   }
 
