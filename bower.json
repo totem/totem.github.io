@@ -1,0 +1,21 @@
+{
+  "name": "totem.github.io",
+  "version": "0.0.0",
+  "homepage": "https://github.com/totem/totem.github.io",
+  "authors": [
+    "Brad Waropay <brad.waropay@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "html5shiv": "~3.7.2",
+    "pure": "~0.6.0"
+  }
+}
