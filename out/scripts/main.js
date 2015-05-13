@@ -1,13 +1,35 @@
 $(document).ready(function(){
 
+  // Detect mobile layout
   var mobile;
 
+  var mobileDetect = function() {
+    var siteWrapBreak = $("html").css("font-size").replace(/[^-\d\.]/g, '') * 48;
+
+    if ($(window).width() < siteWrapBreak) {
+      mobile = true;
+    } else {
+      mobile = false;
+    }
+
+    console.log(mobile, $(window).width(), siteWrapBreak);
+  }
+
+  // Generate anchors and side nav anchor links
   $('.site-content h1, .site-content h2').each(function(){
-    $('.content-nav .anchor-links').append('<li class="tag-' + this.nodeName.toLowerCase() + '"><a href="#' + $(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'') + '">' + $(this).text() + '</a></li>');
     $(this).addClass('anchor').attr('id',$(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,''));
+    $('.content-nav .anchor-links').append('<li class="tag-' + this.nodeName.toLowerCase() + '"><a href="#' + $(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'') + '">' + $(this).text() + '</a></li>');
     $('.content-nav .anchor-links li:first-child a').parent().addClass('active');
   });
 
+  // Set nav anchor links width
+  var anchorsWidth = function() {
+    var siteWrap = $('.site-wrap').width();
+
+    $('.anchor-links.sticky').width((siteWrap / 4) - 30);
+  }
+
+  // Anchor scroll
   $('.content-nav .anchor-links li').on('click', 'a', function(event) {
     var offset;
 
@@ -23,6 +45,7 @@ $(document).ready(function(){
     event.preventDefault();
   });
 
+  // Set anchor sections
   var anchors = $('.anchor');
   var anchorLinks = $('.anchor-links li');
 
@@ -38,28 +61,10 @@ $(document).ready(function(){
     }
   }
 
-  var mobileDetect = function() {
-    var siteWrapBreak = $("html").css("font-size").replace(/[^-\d\.]/g, '') * 48;
-
-    if ($(window).width() < siteWrapBreak) {
-      mobile = true;
-    } else {
-      mobile = false;
-    }
-
-    console.log(mobile, $(window).width(), siteWrapBreak);
-  }
-
-  var anchorsWidth = function() {
-    var siteWrap = $('.site-wrap').width();
-
-    $('.anchor-links.sticky').width((siteWrap / 4) - 30);
-  }
-
   var resizeHandler = function(){
     mobileDetect();
-    sectionHeight();
     anchorsWidth();
+    sectionHeight();
   }
 
   var scrollHandler = function() {
