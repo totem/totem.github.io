@@ -67,6 +67,7 @@ $(document).ready(function(){
     sectionHeight();
   }
 
+  // Check section on scroll
   var scrollHandler = function() {
     $(document).scroll(function() {
       console.log(anchors.length);
