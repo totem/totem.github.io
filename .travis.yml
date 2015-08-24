@@ -6,4 +6,5 @@ node_js:
 script: 'node_modules/gulp/bin/gulp.js'
 
 branches:
-  only: develop
+  except:
+    - master
