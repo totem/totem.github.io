@@ -10,10 +10,12 @@ In order to contribute towards improving totem documentation , please fork this 
 
 ### Pre-Requisites
 - node v0.10.30+
+- bower (``` npm install -g bower ```)
 
 ### Installing Dependencies
 ```
 npm install
+bower install
 ```
 
 ### Running Documentation Server (Locally)
