@@ -42,7 +42,6 @@ gulp.task('vendorStyles', ['cleanVendorStyles'], function() {
       '*'
     ]))
     .pipe(plugins.concat('vendor.css'))
-    // .pipe(plugins.uglify()) >> ISSUE WITH PLUGIN
     .pipe(gulp.dest(dest + 'styles/vendor'));
 });
 
