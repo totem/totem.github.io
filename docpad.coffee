@@ -28,6 +28,11 @@ docpadConfig = {
     mdPages: ->
       @getCollection('html').findAllLive({extension: 'md'}).on 'add', (model) ->
           model.setMetaDefaults({layout: 'default'})
+  plugins:
+    ghpages:
+      deployRemote: 'origin'
+      deployBranch: 'gh-pages'
+      outPath: '.'
 }
 
 # Export the DocPad Configuration
