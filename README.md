@@ -1,4 +1,4 @@
-# totem.github.io [![Build Status](https://travis-ci.org/totem/totem.github.io.svg)](https://travis-ci.org/totem/totem.github.io)
+# totem.github.io [![Build Status](https://travis-ci.org/totem/totem.github.io.svg?branch=develop)](https://travis-ci.org/totem/totem.github.io)
 In order to look at published version for totem documentation , please visit
 [totem.github.io](http://totem.github.io)
 
