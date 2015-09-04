@@ -9,6 +9,7 @@ variables:
   public_port: 9778
   private_port: 9778
   check_path: "/"
+  host_prefix: "totem-site"
 
 deployers:
   totem-develop-us-west-1:
