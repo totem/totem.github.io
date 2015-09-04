@@ -21,7 +21,6 @@ RUN cd $BASEDIR && \
     ./node_modules/docpad/bin/docpad generate --env ${NODE_ENV}
 
 WORKDIR ${BASEDIR}
-ENTRYPOINT ["./node_modules/docpad/bin/docpad"]
-CMD ["server", "--env", "production"]
+CMD ["server.js"]
 
 

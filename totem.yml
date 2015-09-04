@@ -6,12 +6,17 @@ variables:
   enable_public_host: true
   node_count: 1
   min_nodes: 1
-  public_port: 9778
-  private_port: 9778
+  public_port: 8080
+  private_port: 8080
   check_path: "/"
   host_prefix: "totem-site"
 
 deployers:
+  __defaults__:
+    deployment:
+      name:
+        value: 'totem-site-{{ ref }}
+
   totem-develop-us-west-1:
     enabled: false
 

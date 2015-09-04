@@ -14,7 +14,8 @@
     "docpad-plugin-less": "~2.4.1",
     "docpad-plugin-livereload": "~2.6.1",
     "docpad-plugin-marked": "~2.3.0",
-    "docpad-plugin-partials": "~2.9.2"
+    "docpad-plugin-partials": "~2.9.2",
+    "node-static": "^0.7.7"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
