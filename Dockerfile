@@ -5,7 +5,7 @@ FROM totem/nodejs-base:0.10.38-trusty
 
 ENV BASEDIR /opt/totem-site
 ENV NODE_ENV production
-EXPOSE 9778
+EXPOSE 8080
 
 RUN npm install -g bower docpad gulp
 
