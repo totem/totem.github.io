@@ -22,6 +22,6 @@ RUN cd $BASEDIR && \
 
 WORKDIR ${BASEDIR}
 ENTRYPOINT ["./node_modules/docpad/bin/docpad"]
-CMD ["server", "--env", "${NODE_ENV}"]
+CMD ["server", "--env", "production"]
 
 
