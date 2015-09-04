@@ -7,7 +7,7 @@ ENV BASEDIR /opt/totem-site
 ENV NODE_ENV production
 EXPOSE 9778
 
-RUN npm install -g bower docpad
+RUN npm install -g bower docpad gulp
 
 ADD package.json $BASEDIR/
 RUN cd $BASEDIR && npm install
