@@ -1,0 +1,19 @@
+enabled:
+  value: "{{ ref == 'develop' or ref is matching('(patch|feature)_.*') }}"
+
+variables:
+  enable_travis: false
+  enable_public_host: true
+  node_count: 1
+  min_nodes: 1
+  public_port: 9778
+  private_port: 9778
+  check_path: "/"
+
+deployers:
+  totem-develop-us-west-1:
+    enabled: false
+
+  not-prod-us-west-1:
+    enabled: true
+
