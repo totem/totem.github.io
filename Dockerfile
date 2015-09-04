@@ -10,7 +10,7 @@ EXPOSE 9778
 RUN npm install -g bower docpad gulp
 
 ADD package.json $BASEDIR/
-RUN cd $BASEDIR && npm install
+RUN cd $BASEDIR && npm install --dev
 
 ADD bower.json $BASEDIR/
 RUN cd $BASEDIR && \
