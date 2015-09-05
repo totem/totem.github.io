@@ -15,7 +15,7 @@ deployers:
   __defaults__:
     deployment:
       name:
-        value: 'totem-site-{{ ref }}
+        value: "totem-site-{{ ref }}"
 
   totem-develop-us-west-1:
     enabled: false
