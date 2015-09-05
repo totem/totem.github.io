@@ -20,7 +20,7 @@ bower install
 
 ### Running Documentation Server (Locally)
 ```
-npm start
+docpad server
 ```
 This will start docpad server at: [http://localhost:9778](http://localhost:9778)
 
@@ -29,3 +29,9 @@ Totem admins can publish the develop branch to [totem.github.io](http://totem.gi
 ```
 node_modules/docpad/bin/docpad deploy-ghpages --env static
 ```
+
+### Totem Integration
+The development version of documentation can be found at:
+[http://totem-site.elb.us-west-1.cu.melt.sh](http://totem-site.elb.us-west-1.cu.melt.sh)
+
+Feature branches are deployed to: `http://totem-site-{{feature_name}}.elb.us-west-1.cu.melt.sh`
