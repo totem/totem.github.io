@@ -15,13 +15,7 @@
     "docpad-plugin-livereload": "~2.6.1",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-partials": "~2.9.2",
-    "node-static": "^0.7.7"
-  },
-  "main": "node_modules/docpad/bin/docpad-server",
-  "scripts": {
-    "start": "node_modules/docpad/bin/docpad-server"
-  },
-  "devDependencies": {
+    "node-static": "^0.7.7",
     "gulp": "^3.8.11",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
@@ -30,5 +24,12 @@
     "gulp-order": "^1.1.1",
     "gulp-uglify": "^1.2.0",
     "main-bower-files": "^2.7.0"
+  },
+  "main": "node_modules/docpad/bin/docpad-server",
+  "scripts": {
+    "start": "node_modules/docpad/bin/docpad-server"
+  },
+  "devDependencies": {
+    
   }
 }
