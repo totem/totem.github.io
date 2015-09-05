@@ -10,7 +10,7 @@ EXPOSE 8080
 RUN npm install -g bower docpad gulp
 
 ADD package.json $BASEDIR/
-RUN cd $BASEDIR && npm install --dev
+RUN cd $BASEDIR && npm install
 
 ADD bower.json $BASEDIR/
 RUN cd $BASEDIR && \
