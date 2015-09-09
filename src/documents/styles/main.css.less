@@ -10,6 +10,18 @@
 @lg: 64em;
 @xl: 80em;
 
+.cf {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
   font-family: 'Open Sans', sans-serif;
@@ -54,21 +66,18 @@ a {
 .site-header {
   background-image: url(/images/gplaypattern_@2X.png);
   background-size: 188px;
-  border-bottom: 4px solid #ccc;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
   position: relative;
 
-  &:before,
+  @media screen and (min-width: @md) {
+    margin-bottom: 0;
+  }
+
   &:after {
     content: "";
     display: block;
     position: absolute;
     width: 100%;
-  }
-
-  &:before {
-    border-bottom: 40px solid @blue;
-    bottom: -44px;
   }
 
   &:after {
@@ -115,6 +124,59 @@ a {
     margin: auto 0;
     padding: 40px 30px;
     text-align: left;
+  }
+}
+
+.site-nav {
+  background-color: @blue;
+  border-top: 4px solid #ccc;
+  margin-top: 15px;
+
+  .site-wrap {
+    padding: 10px 30px;
+  }
+}
+
+.site-nav-list {
+  .cf;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.site-nav-list-item {
+  float: none;
+  margin: 0 0 15px;
+
+  @media screen and (min-width: @md) {
+    float: left;
+    margin: 0 15px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.active {
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 21px;
+    font-weight: 300;
+    text-decoration: none;
   }
 }
 

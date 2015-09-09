@@ -28,6 +28,10 @@ docpadConfig = {
     mdPages: ->
       @getCollection('html').findAllLive({extension: 'md'}).on 'add', (model) ->
           model.setMetaDefaults({layout: 'default'})
+
+    navLinks: ->
+      @getCollection('html').findAllLive({isNavLink:true})
+
   plugins:
     ghpages:
       deployRemote: 'origin'

@@ -1,3 +1,8 @@
+---
+title: "Assumptions"
+isNavLink: true
+---
+
 # About
 This sections captures all major assumptions and considerations that we made for totem.
 It is easy to loose track of this information. So we decided to keep track of these changes.
