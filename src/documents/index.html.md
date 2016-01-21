@@ -185,7 +185,7 @@ This section defines the security settings to be used globally or per applicatio
 security:
   profile: myapp
 ```
-In the above example security profile is changed from 'default' to 'myapp'.  Refer [Encrypted Values](README.md#encrypted-values) section to kno more about encryption.
+In the above example security profile is changed from 'default' to 'myapp'.  Refer [Encrypted Values](README.md#encrypted-values) section to know more about encryption.
 
 ### deployers
 This section defines one or more deployer definition.  Each deployer definition consists of different settings to be used for deploying given application and url of the deployer. Typically, the urls can be defined in separate totem file (cluster-def.yml), while the applications specific settings can be added in totem.yml file.
@@ -194,4 +194,26 @@ This section defines one or more deployer definition.  Each deployer definition 
 This section defines one or more hooks that is being enabled for the given application. The hooks may be a CI hook or builder hook.
 
 ### notifications
-This section define one or more notifiers (e.g: github, hipchat) to be used for given application to send success/failed notifications.
+This section defines one or more notifiers (e.g: github, hipchat) to be used for given application to send success/failed notifications.
+
+### environment
+This section defines top level environment variables used by application template. The value defined can be
+- Raw string 
+- Encrypted Values (Refer [Encrypted Values](README.md#encrypted-values) section to know more about encryption.)
+- Templated Values
+
+e.g.: 
+```yaml
+environment:
+  env1: "value1"
+  env2:
+    value: "{{variable2}}"
+  env3:
+    value: |
+      # if ref == 'master'
+      ******encrypted value for master ******
+      # else
+      ******encrypted value for non master ******
+      # endif
+    encrypted: true
+```
