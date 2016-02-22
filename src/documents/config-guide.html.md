@@ -1,3 +1,8 @@
+---
+title: "Config"
+isNavLink: true
+---
+
 # Totem Config Guide
 ## About
 This guide covers the basics of totem configuration file used per deployed application in totem.

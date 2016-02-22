@@ -1,3 +1,8 @@
+---
+title: "Home"
+isNavLink: true
+---
+
 # What is totem?
 Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology ([Docker](https://www.docker.com)).
 
