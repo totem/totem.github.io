@@ -160,15 +160,17 @@ schedule: '*:0/5'
 ```
 This will schedule your deployment to execute every 5 minutes.
 
+**Example deployment**: https://github.com/totem/totem-demo/blob/example_schedule/totem.yml
+
 It uses systemd timer syntax for schedule. See: https://www.freedesktop.org/software/systemd/man/systemd.time.html#Calendar%20Event
 
 Here are commonly used schedule examples:
 
-Schedule                |     Description
-------------------------|------------------
-*:0/15                  | Schedules deployment to run every 5 minutes (0, 15, 30, 45)
-*-*-* 11:00:00          | Run 11:00 AM every day (UTC)
-Mon *-*-* 00:00:00      | Runs weekly (every monday at midnight UTC)
+|Schedule                |     Description                                               |
+|------------------------|---------------------------------------------------------------|
+|`*:0/15`                | Schedules deployment to run every 5 minutes (0, 15, 30, 45)   |
+|`*-*-* 11:00:00`        | Run 11:00 AM every day (UTC)                                  |
+|`Mon *-*-* 00:00:00`    | Runs weekly (every monday at midnight UTC)                    |
 
 **Points to know**:
 - This feature is currently in beta.
