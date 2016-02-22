@@ -152,7 +152,7 @@ environment:
       # endif
     encrypted: true
 ```
-### schedule
+## schedule
 You can run your deployment at a given schedule.
 e.g.: 
 ```yaml
