@@ -153,3 +153,31 @@ environment:
       # endif
     encrypted: true
 ```
+### schedule
+You can run your deployment at a given schedule.
+e.g.: 
+```yaml
+schedule: '*:0/5'
+```
+This will schedule your deployment to execute every 5 minutes.
+
+It uses systemd timer syntax for schedule. See: https://www.freedesktop.org/software/systemd/man/systemd.time.html#Calendar%20Event
+
+Here are commonly used schedule examples:
+
+Schedule                |     Description
+------------------------|------------------
+*:0/15                  | Schedules deployment to run every 5 minutes (0, 15, 30, 45)
+*-*-* 11:00:00          | Run 11:00 AM every day (UTC)
+Mon *-*-* 00:00:00      | Runs weekly (every monday at midnight UTC)
+
+**Points to know**:
+- This feature is currently in beta.
+- Timezone can not be specified as part of schedule (even though systemd supports it). All timezones are considered as UTC.
+- Specifying scheduler disables proxy support.
+- Scheduled jobs are responsible for error handling , email notifications, concurrent runs , locking etc.
+- Jobs are typically scheduled on one of the nodes. If for some reason node goes down, fleet will schedule it on another node.
+- Typically, you should ony need to run 1 node for scheduled deployment. However, if you do select multiple, the job will get scheduled at multiple nodes at same time. Your job should handle partitioning / concurrent locking when dealing with same.
+- For troubleshooting, use totem logs for your application. However, to troubleshoot issues with scheduling itself, you need to access 'systemd' logs. In order to view systemd logs, use https://github.com/totem/totem-logs/blob/master/cli/tail.js with option `-p systemd`
+
+
