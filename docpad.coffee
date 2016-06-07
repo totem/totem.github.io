@@ -17,7 +17,7 @@ docpadConfig = {
         'styles/main.css'
       ]
 
-    getPreparedTitle: -> if @document.title then '#{@document.title} | #{@site.title}' else @site.title
+    getPreparedTitle: -> if @document.title then "#{@document.title} | #{@site.title}" else @site.title
 
     plugins:
 
