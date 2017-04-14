@@ -15,7 +15,7 @@ Issues may include help requests, bugs or feature requests.
 
 # Architecture
 ## High Level flow
-![](../files/images/totem.png)
+![](https://github.com/totem/totem.github.io/blob/develop/src/files/images/totem.png)
 * Developer commits file to git and pushes the changes to scm (e.g: [github](https://github.com/))
 * Github triggers webhooks for push events to image builder tool e.g: ["Image Factory"](https://github.com/totem/docker-image-factory) and CI tools like [Travis](https://travis-ci.org), [Bamboo](https://www.atlassian.com/software/bamboo).
 * Once travis  (or any other ci) build  and image builder build finishes it notifies [orchestrator](https://github.com/totem/cluster-orchestrator) about the status using post build webhooks.
@@ -25,7 +25,7 @@ Issues may include help requests, bugs or feature requests.
 
 ## [Application Deployment](deployment.md)
 Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
-![](../files/images/totem_app_deployment.png)
+![](https://github.com/totem/totem.github.io/blob/develop/src/files/images/totem_app_deployment.png)
 
 ## Components
 The "Totem Ecosystem" comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
