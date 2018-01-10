@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Assumptions | Totem</title>
+  <meta name="generator" content="DocPad v6.73.5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link  rel="stylesheet" href="styles/vendor/vendor.css" /><link  rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-wrap pure-g">
+      <div class="site-logo pure-u-1 pure-u-md-1-4">
+        <a href="/"><img src="/images/totem-logo.png" alt="totem" class="pure-img" /></a>
+      </div>
+      <h1 class="site-tagline pure-u-1 pure-u-md-3-4">Documentation, issues, guides.</h1>
+    </div>
+    <nav class="site-nav">
+      <div class="site-wrap pure-g">
+        <div class="pure-u-1">
+          <ul class="site-nav-list">
+            
+              <li class="site-nav-list-item active">
+                <a href="/assumptions.html">Assumptions</a>
+              </li>
+            
+              <li class="site-nav-list-item inactive">
+                <a href="/config-guide.html">Config Guide</a>
+              </li>
+            
+              <li class="site-nav-list-item inactive">
+                <a href="/index.html">Home</a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="site-wrap pure-g">
+    <nav class="content-nav pure-u-1 pure-u-md-1-4">
+      <ul class="anchor-links"></ul>
+    </nav>
+    <div class="site-content pure-u-1 pure-u-md-3-4" role="main">
+      <h1 id="about">About</h1>
+<p>This sections captures all major assumptions and considerations that we made for totem.
+It is easy to loose track of this information. So we decided to keep track of these changes.</p>
+<h2 id="09-04-2015">09/04/2015</h2>
+<h3 id="meeting-josh-jimmy-sukrit-">Meeting (Josh, Jimmy, Sukrit)</h3>
+<ul>
+<li>For totem configurator (github), we will use 2 factor auth using github and also provide support for personal access token. This will allow configurator to be easily used for development using personal access token (for testing).</li>
+<li>Since our services our spanning across cluster, we decided to have a central place to lookup. Ideally we want to have another service that can publish that information in future, but for now we will simply hardocde the values manually and publish out later. (TBD:  apiary vs hyperschema)</li>
+</ul>
+<h2 id="09-07-2015">09/07/2015</h2>
+<h3 id="format-selection-for-schemas-apiary-hyperschema-sukrit-">Format Selection for Schemas - Apiary, HyperSchema  (Sukrit)</h3>
+<ul>
+<li>Based on following reasons, I decided to go ahead with hyperschema<ul>
+<li>I have already used hyperschema for all other projects. (It has some pain points , but do not feel it is worth an effort that it needs to be replaced.)</li>
+<li>Apiary seems to do a decent job for translating human readable format to json. However, when dealing with only machines, it is too deep and too verbose where as hyperschema seems relatively less verbose.</li>
+<li>Could not find a way to translate json document to human readable document. In our current use case, we are only dealing with machines publishing information, so we will we working with json format. The human reable format should be the output so that we do not have to write documentation.</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <footer class="site-footer"></footer>
+  <script defer="defer"  src="scripts/vendor/vendor.js"></script><script defer="defer"  src="scripts/main.js"></script>
+</body>
+</html>

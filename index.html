@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Home | Totem</title>
+  <meta name="generator" content="DocPad v6.73.5" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link  rel="stylesheet" href="styles/vendor/vendor.css" /><link  rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-wrap pure-g">
+      <div class="site-logo pure-u-1 pure-u-md-1-4">
+        <a href="/"><img src="/images/totem-logo.png" alt="totem" class="pure-img" /></a>
+      </div>
+      <h1 class="site-tagline pure-u-1 pure-u-md-3-4">Documentation, issues, guides.</h1>
+    </div>
+    <nav class="site-nav">
+      <div class="site-wrap pure-g">
+        <div class="pure-u-1">
+          <ul class="site-nav-list">
+            
+              <li class="site-nav-list-item inactive">
+                <a href="/assumptions.html">Assumptions</a>
+              </li>
+            
+              <li class="site-nav-list-item inactive">
+                <a href="/config-guide.html">Config Guide</a>
+              </li>
+            
+              <li class="site-nav-list-item active">
+                <a href="/index.html">Home</a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="site-wrap pure-g">
+    <nav class="content-nav pure-u-1 pure-u-md-1-4">
+      <ul class="anchor-links"></ul>
+    </nav>
+    <div class="site-content pure-u-1 pure-u-md-3-4" role="main">
+      <h1 id="what-is-totem-">What is totem?</h1>
+<p>Totem is continous delivery pipline tool which is aimed in simplifying delivery of the code for stateless application to any environment. Under the hood, it utilizes containerization tools and technology (<a href="https://www.docker.com">Docker</a>).</p>
+<p>It was specifically designed for micro services/frameworks by utilizing practices and patterns that are used for deploying the same (<a href="http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/">gitflow</a>, service discovery, containerization, centralized logging, and more...)</p>
+<h1 id="reporting-issues">Reporting Issues</h1>
+<p>Issues can be reported at :
+<a href="https://github.com/totem/totem.github.io/issues">https://github.com/totem/totem.github.io/issues</a>
+Issues may include help requests, bugs or feature requests.</p>
+<h1 id="architecture">Architecture</h1>
+<h2 id="high-level-flow">High Level flow</h2>
+<p><img src="https://raw.githubusercontent.com/totem/totem.github.io/develop/src/files/images/totem.png" alt=""></p>
+<ul>
+<li>Developer commits file to git and pushes the changes to scm (e.g: <a href="https://github.com/">github</a>)</li>
+<li>Github triggers webhooks for push events to image builder tool e.g: <a href="https://github.com/totem/docker-image-factory">&quot;Image Factory&quot;</a> and CI tools like <a href="https://travis-ci.org">Travis</a>, <a href="https://www.atlassian.com/software/bamboo">Bamboo</a>.</li>
+<li>Once travis  (or any other ci) build  and image builder build finishes it notifies <a href="https://github.com/totem/cluster-orchestrator">orchestrator</a> about the status using post build webhooks.</li>
+<li>Orchestrator on receving any hook, loads/caches the configuration for the build (totem.yml). This file is loaded from <a href="http://aws.amazon.com/s3/">Amazon S3</a> (or <a href="https://coreos.com/using-coreos/etcd/">etcd</a>).</li>
+<li>Orchestrator on receving all the hooks with status as &quot;success&quot;, it invokes deployer api to deploy the built image to <a href="https://coreos.com/">CoreOS cluster</a>.</li>
+<li>Deployer creates <a href="https://coreos.com/using-coreos/clustering">fleet</a> unit files for the application and submits the job to fleet daemon (running on CoreOS cluster). On successul deploy, deployer promotes the current deployment by updating the yoda proxy configuration stored in etcd.</li>
+</ul>
+<h2 id="-application-deployment-deployment-md-"><a href="deployment.md">Application Deployment</a></h2>
+<p>Here is a sample application deployed using Totem in Amazon EC2 infrastructure.
+<img src="https://raw.githubusercontent.com/totem/totem.github.io/develop/src/files/images/totem_app_deployment.png" alt=""></p>
+<h2 id="components">Components</h2>
+<p>The &quot;Totem Ecosystem&quot; comprises of several components each responsible to perform discrete set of jobs. One may choose to deploy some/all of the components in Totem , depending upon his/her needs. It is also possible to have
+additional components for deploying applications using Totem (for e.g.: sidekicks for registering with SkyDNS)</p>
+<ul>
+<li><a href="https://github.com/totem/docker-image-factory"><strong>Image Factory</strong></a>: Responsible for building docker images using &quot;Dockerfile&quot; and push these to a central registry
+(e.g: Quay)</li>
+<li><a href="https://github.com/totem/cluster-orchestrator"><strong>Orchestrator</strong></a>: Responsible for consuming hooks from different services (like Travis, Image Factory etc) and creating deployment requests to <em>Deployers</em> for configured clusters.</li>
+<li><a href="https://github.com/totem/cluster-deployer"><strong>Deployer</strong></a>: Schedules the deployment to a cluster (currently CoreOS) and sets up the proxy hosts/listeners.</li>
+<li><a href="https://github.com/totem/yoda-proxy"><strong>Yoda Proxy</strong></a>: Dynamic Haproxy backed by etcd.</li>
+<li><a href="https://github.com/totem/yoda-discover"><strong>Yoda Discover</strong></a>: Acts as side kick for registering application unit to yoda proxy using etcd as backing store.
+Also provides ability to register yoda hosts to etcd.</li>
+<li><a href="https://github.com/totem/yoda-discover"><strong>Yoda Route53</strong></a>: Registers the yoda hosts with Amazon Route 53 for DNS based load balancing for hosts.</li>
+<li><a href="https://github.com/totem/fleet-templates"><strong>Fleet Templates</strong></a>: Jinja based fleet unit files that gets deployed to CoreOS cluster. Some of the default templates are already provided, but one may choose to have his/her own custom templates.</li>
+</ul>
+<h1 id="totem-events">Totem Events</h1>
+<h2 id="overview">Overview</h2>
+<p>The different totem components (deployer, orchestrator) publishes events to elasticsearch (if enabled).  Here is an example event:</p>
+<pre><code class="lang-json">{
+    &quot;date&quot;: &quot;2015-04-01T06:25:06.389047&quot;,
+    &quot;type&quot;: &quot;NEW_JOB&quot;,
+    &quot;component&quot;: &quot;orchestrator&quot;,
+    &quot;meta-info&quot;: {
+      &quot;git&quot;: {
+        &quot;owner&quot;: &quot;meltmedia&quot;,
+        &quot;repo&quot;: &quot;totem-demo&quot;,
+        &quot;ref&quot;: &quot;master&quot;,
+        &quot;commit&quot;: &quot;87c4419d3e278036055ca2cd022583e0397d3a5d&quot;
+      },
+      &quot;job-id&quot;: &quot;9be083a1-9fc2-48b3-83bc-e11c8bbab305&quot;
+    },
+    &quot;details&quot;: {
+    }
+}
+</code></pre>
+<h2 id="event-fields">Event fields</h2>
+<p>Every event consists of following fields:</p>
+<ul>
+<li><em>date</em>:  Timestamp for event</li>
+<li><em>type</em>:  Event type</li>
+<li><em>component</em>: Totem component that generated the event (orchestrator, deployer).</li>
+<li><em>meta-info</em>: Meta info associated with the event. Typically it comprises of git meta-data and job identifier.</li>
+<li><em>details</em>: The detailed json object describing the event.</li>
+</ul>
+
+    </div>
+  </div>
+  <footer class="site-footer"></footer>
+  <script defer="defer"  src="scripts/vendor/vendor.js"></script><script defer="defer"  src="scripts/main.js"></script>
+</body>
+</html>
